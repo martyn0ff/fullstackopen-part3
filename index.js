@@ -70,6 +70,20 @@ app.delete("/api/persons/:id", (req, res) => {
 app.post("/api/persons", (req, res) => {
   const person = req.body;
 
+  if (!person.name || person.name === "" || !person.number || person.number === "") {
+    return res.status(400).json({
+      status: "error",
+      message: "Name and number are required."
+    });
+  }
+
+  if (persons.some(p => p.name === person.name)) {
+    return res.status(400).json({
+      status: "error",
+      message: `Person with the name ${person.name} already exists.`
+    })
+  }
+
   const newPerson = {
     id: String(Math.floor(Math.random()*100_000)),
     ...person
