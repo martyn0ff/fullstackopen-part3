@@ -26,6 +26,14 @@ let persons = [
 
 const PORT = 4444;
 
+// Info
+app.get("/info", (req, res) => {
+  res.send(`
+      <p>Phonebook has info for ${persons.length} people.</p>
+      <code>${new Date()}</code>
+    `);
+})
+
 // Get all persons
 app.get("/api/persons", (req, res) => {
   res.json(persons);
