@@ -5,6 +5,6 @@
 # Clean previous build, build frontend files and move them
 # to static server
 rm -vrf ./frontend-static/dist \
-  && cd ./fontend \
+  && cd ./frontend \
   && npm run build \
   && mv -v ./frontend/dist ./frontend-static
