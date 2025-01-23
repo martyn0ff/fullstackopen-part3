@@ -1,0 +1,16 @@
+{
+  "name": "database",
+  "version": "1.0.0",
+  "description": "Database for Phonebook application",
+  "license": "MIT",
+  "author": "Roman Martynoff",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./start-database-server.sh"
+  },
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3"
+  }
+}

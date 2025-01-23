@@ -1,0 +1,7 @@
+{
+  "config": {
+    "notification": {
+      "displayTime": 7000
+    }
+  }
+}
