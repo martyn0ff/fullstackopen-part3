@@ -25,7 +25,7 @@ let persons = [
   }
 ]
 
-const PORT = 4444;
+const PORT = process.env.PORT || 3001;
 
 //
 // Setup
