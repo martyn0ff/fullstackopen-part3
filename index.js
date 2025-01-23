@@ -26,6 +26,17 @@ let persons = [
 
 const PORT = 4444;
 
+//
+// Setup
+//
+
+// Enable JSON parser
+app.use(express.json());
+
+//
+// Endpoints
+//
+
 // Info
 app.get("/info", (req, res) => {
   res.send(`
@@ -53,6 +64,22 @@ app.get("/api/persons/:id", (req, res) => {
 app.delete("/api/persons/:id", (req, res) => {
   persons = persons.filter(person => person.id !== req.params.id);
   res.status(204).end();
+})
+
+// Create person
+app.post("/api/persons", (req, res) => {
+  const person = req.body;
+
+  const newPerson = {
+    id: String(Math.floor(Math.random()*100_000)),
+    ...person
+  };
+
+  persons = persons.concat(newPerson);
+  res.status(200).send({
+    status: "success",
+    id: newPerson.id
+  })
 })
 
 app.listen(PORT);
