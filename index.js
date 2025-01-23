@@ -1,4 +1,5 @@
 const express = require("express");
+const morgan = require("morgan");
 const app = express();
 
 let persons = [
@@ -32,6 +33,8 @@ const PORT = 4444;
 
 // Enable JSON parser
 app.use(express.json());
+// Enable logging
+app.use(morgan("tiny"));
 
 //
 // Endpoints
