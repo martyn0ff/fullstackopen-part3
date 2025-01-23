@@ -1,0 +1,29 @@
+{
+  "name": "fullstackopen-part3",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Part 3 for Fullstackopen.com",
+  "homepage": "https://github.com/martyn0ff/fullstackopen-part3#readme",
+  "bugs": {
+    "url": "https://github.com/martyn0ff/fullstackopen-part3/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martyn0ff/fullstackopen-part3.git"
+  },
+  "license": "MIT",
+  "author": "Roman Martynoff",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
