@@ -49,5 +49,11 @@ app.get("/api/persons/:id", (req, res) => {
   res.json(person);
 })
 
+// Delete person by ID
+app.delete("/api/persons/:id", (req, res) => {
+  persons = persons.filter(person => person.id !== req.params.id);
+  res.status(204).end();
+})
+
 app.listen(PORT);
 console.log(`Server started on port ${PORT}.`);
