@@ -10,6 +10,11 @@
 - NodeJS backend's port defaults to `3002`, configurable through `PHONEBOOK_BACKEND_PORT` environment variable
 - NodeJS backend's protocol defaults to `https`, configurable through `PHONEBOOK_BACKEND_PROTOCOL` environment variable
 
-Frontend is using Vite. Therefore, all variables that you need to pass to the front-end have to be prefixed with `VITE_`
+> **⚠️ Note!**<br/>Frontend is using Vite. Therefore, all variables that you need to pass to the front-end have to be prefixed with `VITE_`
 
-> **⚠️ Note!**<br>Backend requires knowledge of the front-end host and port, so that it can set up correct CORS rules. It also requires knowledge of database host and port.
+> **⚠️ Note!**<br/>Backend requires knowledge of the front-end host and port, so that it can set up correct CORS rules. It also requires knowledge of database host and port.
+
+## Links
+- Database is available at https://phonebookdatabase.onrender.com/ (currently JSON Server)
+- Frontend is available at https://phonebookfrontend-3fbo.onrender.com/
+- Backend is available at https://phonebookbackend-3763.onrender.com
