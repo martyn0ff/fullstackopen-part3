@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const DATABASE_PROTOCOL = "http";
+const DATABASE_PROTOCOL = process.env.PHONEBOOK_DATABASE_PROTOCOL || "https";
 const DATABASE_HOST = process.env.PHONEBOOK_DATABASE_HOST || "localhost";
 const DATABASE_PORT = process.env.PHONEBOOK_DATABASE_PORT || 3000;
 const DATABASE_BASE_URL = `${DATABASE_PROTOCOL}://${DATABASE_HOST}:${DATABASE_PORT}`;

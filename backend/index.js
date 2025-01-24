@@ -3,12 +3,11 @@ const morgan = require("morgan");
 const phonebookClient = require("./client/PhonebookClient");
 const app = express();
 const cors = require("cors");
-const axios = require("axios");
 
-const BACKEND_PROTOCOL = "http";
+const BACKEND_PROTOCOL = process.env.PHONEBOOK_BACKEND_PROTOCOL || "https";
 const BACKEND_HOST = process.env.PHONEBOOK_BACKEND_HOST || "localhost";
 const BACKEND_PORT = process.env.PHONEBOOK_BACKEND_PORT || 3002;
-const FRONTEND_PROTOCOL = "http";
+const FRONTEND_PROTOCOL = process.env.PHONEBOOK_STATIC_PROTOCOL || "https";
 const FRONTEND_HOST = process.env.PHONEBOOK_STATIC_HOST || "localhost";
 const FRONTEND_PORT = process.env.PHONEBOOK_STATIC_PORT || 3001;
 
@@ -115,5 +114,5 @@ async function start() {
 }
 
 app.listen(BACKEND_PORT, BACKEND_HOST, start);
-console.log(`Phonebook backend server started on ${BACKEND_HOST}:${BACKEND_PORT}.`);
+console.log(`Phonebook backend server started on ${BACKEND_PROTOCOL}://${BACKEND_HOST}:${BACKEND_PORT}.`);
 console.log("CORS options: %o", corsOptions);
