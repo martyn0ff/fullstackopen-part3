@@ -112,15 +112,15 @@ async function start() {
   });
 }
 
-app.listen(BACKEND_PORT, BACKEND_HOST, start);
+app.listen(+BACKEND_PORT, BACKEND_HOST, start);
 console.log(`Phonebook backend server started on ${BACKEND_PROTOCOL}://${BACKEND_HOST}:${BACKEND_PORT}.`);
 console.log("CORS options: %o", corsOptions);
 
 // Functions
 function configureCorsOptions() {
-  let origin = `${FRONTEND_PROTOCOL}://${FRONTEND_HOST}"`;
-  if (FRONTEND_HOST === "https" && FRONTEND_PORT === 443
-    || FRONTEND_HOST === "http" && FRONTEND_PORT === 80) {
+  let origin = `${FRONTEND_PROTOCOL}://${FRONTEND_HOST}`;
+  if (FRONTEND_PROTOCOL === "https" && +FRONTEND_PORT === 443
+    || FRONTEND_PROTOCOL === "http" && +FRONTEND_PORT === 80) {
     // ":port" is not required at the end
     // browsers match these strictly
   }
