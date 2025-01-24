@@ -6,6 +6,7 @@ const DATABASE_PORT = process.env.PHONEBOOK_DATABASE_PORT || 3000;
 const DATABASE_BASE_URL = `${DATABASE_PROTOCOL}://${DATABASE_HOST}:${DATABASE_PORT}`;
 
 function getAll() {
+  console.log("DB URL: " + DATABASE_BASE_URL);
   return axios.get(`${DATABASE_BASE_URL}/persons`)
     .then(res => res.data)
     .catch(err => console.error(err));

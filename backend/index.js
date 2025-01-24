@@ -15,10 +15,22 @@ const FRONTEND_PORT = process.env.PHONEBOOK_STATIC_PORT || 3001;
 // Setup
 //
 
+function configureCorsOptions() {
+  let origin = `${FRONTEND_PROTOCOL}://${FRONTEND_HOST}";`
+  if (BACKEND_PROTOCOL === "https" && BACKEND_PORT === 443
+    || BACKEND_PROTOCOL === "http" && BACKEND_PORT === 80) {
+    // ":port" is not required at the end
+    // browsers match these strictly
+  }
+  else {
+    origin += `:${BACKEND_PORT}`;
+  }
+
+  return { origin }
+}
+
 // CORS
-const corsOptions = {
-  origin: `${FRONTEND_PROTOCOL}://${FRONTEND_HOST}:${FRONTEND_PORT}`,
-};
+const corsOptions = configureCorsOptions();
 app.use(cors(corsOptions));
 // Enable JSON parser
 app.use(express.json());
@@ -35,6 +47,7 @@ async function start() {
   // Info
   app.get("/info", async (req, res) => {
     const persons = await phonebookClient.getAll();
+    console.log(persons);
     res.send(`
       <p>Phonebook has info for ${persons.length} people.</p>
       <code>${new Date()}</code>
