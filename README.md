@@ -7,4 +7,6 @@
 - NodeJS backend's host defaults to `localhost`, configurable through `PHONEBOOK_BACKEND_HOST` environment variable
 - NodeJS backend's port defaults to `3002`, configurable through `PHONEBOOK_BACKEND_PORT` environment variable
 
-> **⚠️ Note!**<br>Backend requires knowledge of the front-end host and port, so that it can set up correct CORS rules.
+Frontend is using Vite. Therefore, all variables that you need to pass to the front-end have to be prefixed with `VITE_`
+
+> **⚠️ Note!**<br>Backend requires knowledge of the front-end host and port, so that it can set up correct CORS rules. It also requires knowledge of database host and port.

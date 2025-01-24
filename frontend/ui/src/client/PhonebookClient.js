@@ -2,8 +2,8 @@ import axios from "axios";
 
 class PhonebookClient {
   static PROTOCOL = "http";
-  static HOST= process.env.PHONEBOOK_BACKEND_HOST || "localhost";
-  static PORT= process.env.PHONEBOOK_BACKEND_PORT || 3002;
+  static HOST = import.meta.env.VITE_PHONEBOOK_BACKEND_HOST || "localhost";
+  static PORT= import.meta.env.VITE_PHONEBOOK_BACKEND_PORT || 3002;
   static BASE_URL= `${PhonebookClient.PROTOCOL}://${PhonebookClient.HOST}:${PhonebookClient.PORT}`;
 
   getAll() {
