@@ -1,0 +1,3 @@
+#!/bin/bash
+
+PHONEBOOK_BACKEND_PROTOCOL=http PHONEBOOK_STATIC_PROTOCOL=http npm run start

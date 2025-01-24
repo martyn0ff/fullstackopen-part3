@@ -7,28 +7,33 @@ const DATABASE_BASE_URL = `${DATABASE_PROTOCOL}://${DATABASE_HOST}:${DATABASE_PO
 
 function getAll() {
   return axios.get(`${DATABASE_BASE_URL}/persons`)
-    .then(res => res.data);
+    .then(res => res.data)
+    .catch(err => console.error(err));
 }
 
 function get(id) {
   return axios.get(`${DATABASE_BASE_URL}/persons/${id}`)
-    .then(res => res.data);
+    .then(res => res.data)
+    .catch(err => console.error(err));
 }
 
 function save(entryObject) {
   return axios.post(`${DATABASE_BASE_URL}/persons`, entryObject)
-    .then(res => res.data);
+    .then(res => res.data)
+    .catch(err => console.error(err));
 }
 
 function update(id, newEntryObject) {
   console.log("id=%o, new=%o", id, newEntryObject);
   return axios.put(`${DATABASE_BASE_URL}/persons/${id}`, newEntryObject)
-    .then(res => res.data);
+    .then(res => res.data)
+    .catch(err => console.error(err));
 }
 
 function remove(id) {
   return axios.delete(`${DATABASE_BASE_URL}/persons/${id}`)
-    .then(res => res.data);
+    .then(res => res.data)
+    .catch(err => console.error(err));
 }
 
 module.exports = { getAll, save, update, get, remove };

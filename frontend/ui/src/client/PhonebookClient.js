@@ -8,17 +8,20 @@ class PhonebookClient {
 
   getAll() {
     return axios.get(`${PhonebookClient.BASE_URL}/api/persons`)
-      .then(res => res.data);
+      .then(res => res.data)
+      .catch(err => console.error(err));
   }
 
   save(entryObject) {
     return axios.post(`${PhonebookClient.BASE_URL}/api/persons`, entryObject)
-      .then(res => res.data);
+      .then(res => res.data)
+      .catch(err => console.error(err));
   }
 
   update(id, newEntryObject) {
     return axios.put(`${PhonebookClient.BASE_URL}/api/persons/${id}`, newEntryObject)
-      .then(res => res.data);
+      .then(res => res.data)
+      .catch(err => console.error(err));
   }
 
   /**
@@ -28,7 +31,8 @@ class PhonebookClient {
    */
   delete(id) {
     return axios.delete(`${PhonebookClient.BASE_URL}/api/persons/${id}`)
-      .then(res => res.data);
+      .then(res => res.data)
+      .catch(err => console.error(err));
   }
 }
 
