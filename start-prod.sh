@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Starting phonebook..."
+
 npm --prefix ./database run start &
 DB_PID=$!
 
