@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import PhonebookComponent from "./components/PhonebookComponent.jsx";
 import PhonebookControlComponent from "./components/PhonebookControlComponent.jsx";
-import axios from "axios";
 import PhonebookEntryObject from "./objects/PhonebookEntryObject.js";
 import PhonebookUtil from "./util/PhonebookUtil.js";
 import PhonebookClient from "./client/PhonebookClient.js";

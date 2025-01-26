@@ -1,7 +1,7 @@
 import axios from "axios";
 
 class PhonebookClient {
-  static BASE_URL = new URL(import.meta.env.VITE_PHONEBOOK_BACKEND_SERVER_URI || "https://localhost:3002");
+  static BASE_URL= new URL(import.meta.env.VITE_PHONEBOOK_BACKEND_SERVER_URI || "https://localhost:3002");
 
   getAll() {
     return axios.get(`${PhonebookClient.BASE_URL}/api/persons`)
@@ -33,4 +33,4 @@ class PhonebookClient {
   }
 }
 
-module.exports = PhonebookClient;
+export default PhonebookClient
