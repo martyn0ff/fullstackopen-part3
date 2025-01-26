@@ -27,7 +27,8 @@ class PhonebookDatabaseClient {
   update(id, newEntryObject) {
     // { new: true } will make the findByIdAndUpdate call
     // return new document instead of old one
-    return  this.phoneBookEntries.findByIdAndUpdate(id, newEntryObject, { new: true });
+    const opts = { new: true, runValidators: true };
+    return this.phoneBookEntries.findByIdAndUpdate(id, newEntryObject, opts);
   }
 
   remove(id) {

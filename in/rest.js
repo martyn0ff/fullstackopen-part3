@@ -2,7 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const unknownEndpoint = require("./middleware/unknownEndpoint");
-const URLUtil= require("../domain/util/URLUtil");
+const URLUtil = require("../domain/util/URLUtil");
 const JsonResponse = require("../domain/JsonResponse");
 
 const FRONTEND_URI = new URL(process.env.PHONEBOOK_FRONTEND_SERVER_URI || "http://localhost:3001");
@@ -54,7 +54,7 @@ class Rest {
       }
       catch (error) {
         console.error(error);
-        return res.status(400).json(JsonResponse.newError(error.message));
+        return res.status(400).json(JsonResponse.newError(error.name, error.message));
       }
 
       return res.json(persons);
@@ -73,7 +73,7 @@ class Rest {
       }
       catch (error) {
         console.error(error);
-        return res.status(400).json(JsonResponse.newError(error.message));
+        return res.status(400).json(JsonResponse.newError(error.name, error.message));
       }
 
       return res.json(person.person);
@@ -86,7 +86,7 @@ class Rest {
       }
       catch (error) {
         console.error(error);
-        return res.status(400).json(JsonResponse.newError(error.message));
+        return res.status(400).json(JsonResponse.newError(error.name, error.message));
       }
       return res.status(204).end();
     });
@@ -106,7 +106,7 @@ class Rest {
       }
       catch (error) {
         console.error(error);
-        return res.status(400).json(JsonResponse.newError(error.message));
+        return res.status(400).json(JsonResponse.newError(error.name, error.message));
       }
 
       if (persons.some(p => p.name === person.name)) {
@@ -114,10 +114,18 @@ class Rest {
           `Person with the name ${person.name} already exists.`));
       }
 
-      const newEntry = await this.dbClient.save(person);
+      const newEntry = {};
+      try {
+        newEntry.entry = await this.dbClient.save(person);
+      }
+      catch (error) {
+        console.error(error);
+        return res.status(400).json(JsonResponse.newError(error.name, error.message));
+      }
+
       return res.status(200).json({
         status: "success",
-        id: newEntry._id
+        id: newEntry.entry._id
       });
     });
 
@@ -130,7 +138,7 @@ class Rest {
       }
       catch (error) {
         console.error(error);
-        return res.status(400).json(JsonResponse.newError(error.message));
+        return res.status(400).json(JsonResponse.newError(error.name, error.message));
       }
 
       return res.status(201).header("Content-Location", id).json({
