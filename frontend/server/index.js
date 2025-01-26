@@ -1,9 +1,9 @@
 const express = require("express");
 const morgan = require("morgan");
+const { getPort } = require("../../common/util/URLUtil");
 const app = express();
 
-const HOST = process.env.PHONEBOOK_STATIC_HOST || "localhost";
-const PORT = process.env.PHONEBOOK_STATIC_PORT || 3001;
+const URI = new URL(process.env.PHONEBOOK_FRONTEND_SERVER_URI || "http://localhost:3001");
 
 //
 // Setup
@@ -17,5 +17,5 @@ app.use(morgan("[static] :remote-addr - :remote-user [:date[clf]] \":method :url
 app.use(express.static("dist"));
 
 // Start server
-app.listen(PORT, HOST);
-console.log(`Static files server started on ${HOST}:${PORT}.`);
+app.listen(+getPort(URI), URI.hostname);
+console.log(`Static files server started on ${URI.origin}.`);

@@ -1,6 +1,5 @@
 # Phonebook full-stack
 
-- Database URI: `PHONEBOOK_DATABASE_URI` env variable (default: `http://localhost:3000)
 - Frontend server URI: `PHONEBOOK_FRONTEND_SERVER_URI` env variable (default: `http://localhost:3001)
 - Backend server URI: `PHONEBOOK_BACKEND_SERVER_URI` env variable (default: `http://localhost:3002)
 

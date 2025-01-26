@@ -2,9 +2,10 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const unknownEndpoint = require("./middleware/unknownEndpoint");
+const URLUtil= require("../../common/util/URLUtil");
 
-const FRONTEND_URI = new URL(process.env.PHONEBOOK_FRONTEND_URI || "http://localhost:3001");
-const BACKEND_URI = new URL(process.env.PHONEBOOK_BACKEND_URI || "http://localhost:3002");
+const FRONTEND_URI = new URL(process.env.PHONEBOOK_FRONTEND_SERVER_URI || "http://localhost:3001");
+const BACKEND_URI = new URL(process.env.PHONEBOOK_BACKEND_SERVER_URI || "http://localhost:3002");
 
 class Rest {
   dbClient;
@@ -114,9 +115,10 @@ class Rest {
 
 
   start(app) {
-    app.listen(+BACKEND_URI.port, BACKEND_URI.hostname);
+    app.listen(URLUtil.getPort(BACKEND_URI), BACKEND_URI.hostname);
     console.log(`Phonebook backend server started on ${BACKEND_URI.origin}.`);
   }
+
 }
 
 module.exports = Rest;
