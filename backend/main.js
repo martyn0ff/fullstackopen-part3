@@ -2,9 +2,9 @@ const path = require("path");
 require("dotenv").config({
   path: path.join(__dirname, `./.env.${process.env.NODE_ENV}`),
 });
-const db = require("./db.js");
-const PhonebookDatabaseClient = require("./client/PhonebookDatabaseClient.js");
-const RestApi = require("./api/RestApi.js");
+const db = require("./db");
+const { PhonebookDatabaseClient } = require("./out/client/PhonebookDatabaseClient");
+const RestApi = require("./in/rest");
 const express = require("express");
 let mongoose = require("mongoose");
 

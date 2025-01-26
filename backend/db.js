@@ -6,10 +6,11 @@ function toJSON() {
   return {
     transform: (document, returnedObject) => {
       returnedObject.id = returnedObject._id.toString()
-      delete returnedObject._id
-      delete returnedObject.__v
+      console.log("toJSON() was called!");
+      delete returnedObject._id;
+      delete returnedObject.__v;
     }
-  }
+  };
 }
 
 function configureMongoose(mongoose) {
@@ -24,4 +25,4 @@ function checkConnectionString() {
   }
 }
 
-module.exports = { toJSON, configureMongoose, getConnectionString }
+module.exports = { toJSON, configureMongoose, getConnectionString };

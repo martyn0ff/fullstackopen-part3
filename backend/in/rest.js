@@ -1,11 +1,12 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+const unknownEndpoint = require("./middleware/unknownEndpoint");
 
 const FRONTEND_URI = new URL(process.env.PHONEBOOK_FRONTEND_URI || "http://localhost:3001");
 const BACKEND_URI = new URL(process.env.PHONEBOOK_BACKEND_URI || "http://localhost:3002");
 
-class RestApi {
+class Rest {
   dbClient;
 
   constructor(dbClient) {
@@ -25,6 +26,9 @@ class RestApi {
     // Enable logging
     app.use(morgan("[backend] :remote-addr - :remote-user [:date[clf]] \":method :url HTTP/:http-version\" :status :res[content-length]"));
     console.log("CORS options: %o", corsOptions);
+    // Unknown endpoints handler
+    // (ensure it's set up last, because
+    // it sends the response)
 
     //
     // Endpoints
@@ -51,7 +55,7 @@ class RestApi {
       if (!person) {
         return res.status(404).send({
           status: "error",
-          message: `Person with ID ${req.params.id} was not found.`
+          message: `Person with ID "${req.params.id}" was not found.`
         });
       }
 
@@ -102,8 +106,12 @@ class RestApi {
       });
     });
 
+    // Handle unknown endpoints
+    app.use(unknownEndpoint());
+
     return this;
   }
+
 
   start(app) {
     app.listen(+BACKEND_URI.port, BACKEND_URI.hostname);
@@ -111,4 +119,4 @@ class RestApi {
   }
 }
 
-module.exports = RestApi;
+module.exports = Rest;
