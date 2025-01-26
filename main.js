@@ -2,7 +2,7 @@ const path = require("path");
 require("dotenv").config({
   path: path.join(__dirname, `./.env.${process.env.NODE_ENV}`),
 });
-const db = require("./db");
+const db = require("./out/db");
 const { PhonebookDatabaseClient } = require("./out/client/PhonebookDatabaseClient");
 const RestApi = require("./in/rest");
 const express = require("express");

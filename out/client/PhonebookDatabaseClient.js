@@ -8,55 +8,30 @@ class PhonebookDatabaseClient {
     this.phoneBookEntries = PhonebookEntryFactory.phonebookEntries(mongoose);
   }
 
-  async getAll() {
-    try {
-      return await this.phoneBookEntries.find({});
-    }
-    catch (error) {
-      console.error(error);
-    }
+  getAll() {
+    return this.phoneBookEntries.find({});
   }
 
-  async get(id) {
-    try {
-      if (!mongoose.Types.ObjectId.isValid(id)) {
-        return Promise.resolve(null);
-      }
-      return await this.phoneBookEntries.findById(id);
+  get(id) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return Promise.resolve(null);
     }
-    catch (error) {
-      console.error(error);
-    }
+    return this.phoneBookEntries.findById(id);
   }
 
-  async save(entryObject) {
-    try {
-      const newEntry = PhonebookEntryFactory.newInstance(this.phoneBookEntries, entryObject);
-      return await newEntry.save();
-    }
-    catch (error) {
-      console.error(error)
-    }
+  save(entryObject) {
+    const newEntry = PhonebookEntryFactory.newInstance(this.phoneBookEntries, entryObject);
+    return newEntry.save();
   }
 
-  async update(id, newEntryObject) {
+  update(id, newEntryObject) {
     // { new: true } will make the findByIdAndUpdate call
     // return new document instead of old one
-    try {
-      return await this.phoneBookEntries.findByIdAndUpdate(id, newEntryObject, { new: true });
-    }
-    catch (error) {
-      console.error(error);
-    }
+    return  this.phoneBookEntries.findByIdAndUpdate(id, newEntryObject, { new: true });
   }
 
-  async remove(id) {
-    try {
-      return await this.phoneBookEntries.findOneAndDelete({ _id: id });
-    }
-    catch (error) {
-      console.error(error);
-    }
+  remove(id) {
+    return this.phoneBookEntries.findOneAndDelete({ _id: id });
   }
 }
 

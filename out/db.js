@@ -6,7 +6,6 @@ function toJSON() {
   return {
     transform: (document, returnedObject) => {
       returnedObject.id = returnedObject._id.toString()
-      console.log("toJSON() was called!");
       delete returnedObject._id;
       delete returnedObject.__v;
     }
