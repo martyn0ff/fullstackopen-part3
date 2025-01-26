@@ -1,10 +1,7 @@
 import axios from "axios";
 
 class PhonebookClient {
-  static PROTOCOL = import.meta.env.VITE_PHONEBOOK_BACKEND_PROTOCOL || "https";
-  static HOST = import.meta.env.VITE_PHONEBOOK_BACKEND_HOST || "localhost";
-  static PORT= import.meta.env.VITE_PHONEBOOK_BACKEND_PORT || 3002;
-  static BASE_URL= `${PhonebookClient.PROTOCOL}://${PhonebookClient.HOST}:${PhonebookClient.PORT}`;
+  static BASE_URL= new URL(import.meta.env.VITE_PHONEBOOK_BACKEND_URI || "https://localhost:3002");
 
   getAll() {
     return axios.get(`${PhonebookClient.BASE_URL}/api/persons`)

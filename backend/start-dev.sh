@@ -1,6 +1,3 @@
 #!/bin/bash
 
-PHONEBOOK_BACKEND_PROTOCOL=http \
-PHONEBOOK_STATIC_PROTOCOL=http \
-PHONEBOOK_DATABASE_PROTOCOL=http \
-  npm run start
+NODE_ENV=dev npm run dev
