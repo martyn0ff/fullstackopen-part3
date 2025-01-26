@@ -12,7 +12,10 @@ async function main() {
   mongoose = await db
     .configureMongoose(mongoose)
     .connect(db.getConnectionString())
-    .catch((err) => {console.error(err)});
+    .catch((err) => {
+      console.error(err);
+      throw err;
+    });
   const dbClient = new PhonebookDatabaseClient(mongoose);
   const rest = new RestApi(dbClient);
   const app = express();
