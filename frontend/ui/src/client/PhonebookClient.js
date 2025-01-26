@@ -4,19 +4,19 @@ class PhonebookClient {
   static BASE_URL= new URL(import.meta.env.VITE_PHONEBOOK_BACKEND_SERVER_URI || "https://localhost:3002");
 
   getAll() {
-    return axios.get(`${PhonebookClient.BASE_URL}/api/persons`)
+    return axios.get(`${PhonebookClient.BASE_URL.origin}/api/persons`)
       .then(res => res.data)
       .catch(err => console.error(err));
   }
 
   save(entryObject) {
-    return axios.post(`${PhonebookClient.BASE_URL}/api/persons`, entryObject)
+    return axios.post(`${PhonebookClient.BASE_URL.origin}/api/persons`, entryObject)
       .then(res => res.data)
       .catch(err => console.error(err));
   }
 
   update(id, newEntryObject) {
-    return axios.put(`${PhonebookClient.BASE_URL}/api/persons/${id}`, newEntryObject)
+    return axios.put(`${PhonebookClient.BASE_URL.origin}/api/persons/${id}`, newEntryObject)
       .then(res => res.data)
       .catch(err => console.error(err));
   }
@@ -27,7 +27,7 @@ class PhonebookClient {
    * @returns {Promise<axios.AxiosResponse<any>>} removed person
    */
   delete(id) {
-    return axios.delete(`${PhonebookClient.BASE_URL}/api/persons/${id}`)
+    return axios.delete(`${PhonebookClient.BASE_URL.origin}/api/persons/${id}`)
       .then(res => res.data)
       .catch(err => console.error(err));
   }
