@@ -3,7 +3,9 @@ require("dotenv").config({
   path: path.join(__dirname, `./.env.${process.env.NODE_ENV}`),
 });
 const db = require("./out/db");
-const { PhonebookDatabaseClient } = require("./out/client/PhonebookDatabaseClient");
+const {
+  PhonebookDatabaseClient,
+} = require("./out/client/PhonebookDatabaseClient");
 const RestApi = require("./in/rest");
 const express = require("express");
 let mongoose = require("mongoose");
@@ -20,7 +22,7 @@ async function main() {
   const rest = new RestApi(dbClient);
   const app = express();
 
-  rest.configure(app).then(rest => rest.start(app));
+  rest.configure(app).then((rest) => rest.start(app));
 }
 
 main();

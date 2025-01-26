@@ -5,8 +5,12 @@ const unknownEndpoint = require("./middleware/unknownEndpoint");
 const URLUtil = require("../domain/util/URLUtil");
 const JsonResponse = require("../domain/JsonResponse");
 
-const FRONTEND_URI = new URL(process.env.PHONEBOOK_FRONTEND_SERVER_URI || "http://localhost:3001");
-const BACKEND_URI = new URL(process.env.PHONEBOOK_BACKEND_SERVER_URI || "http://localhost:3002");
+const FRONTEND_URI = new URL(
+  process.env.PHONEBOOK_FRONTEND_SERVER_URI || "http://localhost:3001",
+);
+const BACKEND_URI = new URL(
+  process.env.PHONEBOOK_BACKEND_SERVER_URI || "http://localhost:3002",
+);
 
 class Rest {
   dbClient;
@@ -17,10 +21,9 @@ class Rest {
 
   // Setup
   async configure(app) {
-
     // Configure CORS
     const corsOptions = {
-      origin: FRONTEND_URI.origin
+      origin: FRONTEND_URI.origin,
     };
     app.use(cors(corsOptions));
     // Enable JSON parser
@@ -50,11 +53,12 @@ class Rest {
       const persons = [];
       try {
         const fetchedPersons = await this.dbClient.getAll();
-        fetchedPersons.forEach(person => persons.push(person));
-      }
-      catch (error) {
+        fetchedPersons.forEach((person) => persons.push(person));
+      } catch (error) {
         console.error(error);
-        return res.status(400).json(JsonResponse.newError(error.name, error.message));
+        return res
+          .status(400)
+          .json(JsonResponse.newError(error.name, error.message));
       }
 
       return res.json(persons);
@@ -66,14 +70,20 @@ class Rest {
       try {
         const fetchedPerson = await this.dbClient.get(req.params.id);
         if (!fetchedPerson) {
-          return res.status(404).json(JsonResponse.newError(
-            `Person with ID ${req.params.id} was not found.`));
+          return res
+            .status(404)
+            .json(
+              JsonResponse.newError(
+                `Person with ID ${req.params.id} was not found.`,
+              ),
+            );
         }
         person.person = fetchedPerson;
-      }
-      catch (error) {
+      } catch (error) {
         console.error(error);
-        return res.status(400).json(JsonResponse.newError(error.name, error.message));
+        return res
+          .status(400)
+          .json(JsonResponse.newError(error.name, error.message));
       }
 
       return res.json(person.person);
@@ -83,10 +93,11 @@ class Rest {
     app.delete("/api/persons/:id", async (req, res) => {
       try {
         await this.dbClient.remove(req.params.id);
-      }
-      catch (error) {
+      } catch (error) {
         console.error(error);
-        return res.status(400).json(JsonResponse.newError(error.name, error.message));
+        return res
+          .status(400)
+          .json(JsonResponse.newError(error.name, error.message));
       }
       return res.status(204).end();
     });
@@ -95,37 +106,51 @@ class Rest {
     app.post("/api/persons", async (req, res) => {
       const person = req.body;
 
-      if (!person.name || person.name === "" || !person.phoneNumber || person.phoneNumber === "") {
-        return res.status(400).json(JsonResponse.newError("Name and number are required."));
+      if (
+        !person.name ||
+        person.name === "" ||
+        !person.phoneNumber ||
+        person.phoneNumber === ""
+      ) {
+        return res
+          .status(400)
+          .json(JsonResponse.newError("Name and number are required."));
       }
 
       const persons = [];
       try {
         const fetchedPersons = await this.dbClient.getAll();
-        fetchedPersons.forEach(person => persons.push(person));
-      }
-      catch (error) {
+        fetchedPersons.forEach((person) => persons.push(person));
+      } catch (error) {
         console.error(error);
-        return res.status(400).json(JsonResponse.newError(error.name, error.message));
+        return res
+          .status(400)
+          .json(JsonResponse.newError(error.name, error.message));
       }
 
-      if (persons.some(p => p.name === person.name)) {
-        return res.status(400).json(JsonResponse.newError(
-          `Person with the name ${person.name} already exists.`));
+      if (persons.some((p) => p.name === person.name)) {
+        return res
+          .status(400)
+          .json(
+            JsonResponse.newError(
+              `Person with the name ${person.name} already exists.`,
+            ),
+          );
       }
 
       const newEntry = {};
       try {
         newEntry.entry = await this.dbClient.save(person);
-      }
-      catch (error) {
+      } catch (error) {
         console.error(error);
-        return res.status(400).json(JsonResponse.newError(error.name, error.message));
+        return res
+          .status(400)
+          .json(JsonResponse.newError(error.name, error.message));
       }
 
       return res.status(200).json({
         status: "success",
-        id: newEntry.entry._id
+        id: newEntry.entry._id,
       });
     });
 
@@ -135,16 +160,20 @@ class Rest {
       const id = req.params.id;
       try {
         await this.dbClient.update(id, newPerson);
-      }
-      catch (error) {
+      } catch (error) {
         console.error(error);
-        return res.status(400).json(JsonResponse.newError(error.name, error.message));
+        return res
+          .status(400)
+          .json(JsonResponse.newError(error.name, error.message));
       }
 
-      return res.status(201).header("Content-Location", id).json({
-        id: id,
-        ...newPerson
-      });
+      return res
+        .status(201)
+        .header("Content-Location", id)
+        .json({
+          id: id,
+          ...newPerson,
+        });
     });
 
     // Handle unknown endpoints
@@ -153,12 +182,10 @@ class Rest {
     return this;
   }
 
-
   start(app) {
     app.listen(URLUtil.getPort(BACKEND_URI), BACKEND_URI.hostname);
     console.log(`Phonebook backend server started on ${BACKEND_URI.origin}.`);
   }
-
 }
 
 module.exports = Rest;

@@ -1,4 +1,6 @@
-const { PhonebookEntryFactory } = require("../../domain/model/PhonebookEntryFactory");
+const {
+  PhonebookEntryFactory,
+} = require("../../domain/model/PhonebookEntryFactory");
 const mongoose = require("mongoose");
 
 class PhonebookDatabaseClient {
@@ -20,7 +22,10 @@ class PhonebookDatabaseClient {
   }
 
   save(entryObject) {
-    const newEntry = PhonebookEntryFactory.newInstance(this.phoneBookEntries, entryObject);
+    const newEntry = PhonebookEntryFactory.newInstance(
+      this.phoneBookEntries,
+      entryObject,
+    );
     return newEntry.save();
   }
 
@@ -37,6 +42,3 @@ class PhonebookDatabaseClient {
 }
 
 module.exports = { PhonebookDatabaseClient };
-
-
-

@@ -16,8 +16,7 @@ class JsonResponse {
     this.message = message;
     if (errorType) {
       this.errorType = errorType;
-    }
-    else {
+    } else {
       delete this.errorType;
     }
     Object.freeze(this);

@@ -1,45 +1,20 @@
 import globals from "globals";
 import js from "@eslint/js";
 import stylisticJs from "@stylistic/eslint-plugin-js";
-
+import eslintConfigPrettier from "eslint-config-prettier";
 
 /** @type {import("eslint").Linter.Config[]} */
 export default [
   js.configs.recommended,
+  eslintConfigPrettier,
   {
-    ignores: [
-      "dist/**",
-    ],
+    ignores: ["dist/**"],
     plugins: {
       "@stylistic/js": stylisticJs,
     },
     rules: {
-      "eqeqeq": "error",
-      "no-trailing-spaces": "error",
-      "object-curly-spacing": [
-        "error", "always"
-      ],
-      "arrow-spacing": [
-        "error", { "before": true, "after": true },
-      ],
+      eqeqeq: "error",
       "no-console": "warn",
-
-      "@stylistic/js/indent": [
-        "error",
-        2
-      ],
-      "@stylistic/js/linebreak-style": [
-        "error",
-        "unix"
-      ],
-      "@stylistic/js/quotes": [
-        "error",
-        "double"
-      ],
-      "@stylistic/js/semi": [
-        "error",
-        "always"
-      ],
     },
     files: ["**/*.js"],
     languageOptions: {
