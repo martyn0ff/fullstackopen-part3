@@ -1,4 +1,4 @@
-const { toJSON } = require("../db");
+const { toJSON } = require("../../db");
 
 class PhonebookEntryFactory {
   static phonebookEntries(mongoose) {

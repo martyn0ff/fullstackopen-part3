@@ -2,7 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const unknownEndpoint = require("./middleware/unknownEndpoint");
-const URLUtil= require("../../common/util/URLUtil");
+const URLUtil= require("../domain/util/URLUtil");
 
 const FRONTEND_URI = new URL(process.env.PHONEBOOK_FRONTEND_SERVER_URI || "http://localhost:3001");
 const BACKEND_URI = new URL(process.env.PHONEBOOK_BACKEND_SERVER_URI || "http://localhost:3002");

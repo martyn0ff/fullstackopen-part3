@@ -1,4 +1,4 @@
-const { PhonebookEntryFactory } = require("../../model/PhonebookEntryFactory")
+const { PhonebookEntryFactory } = require("../../domain/model/PhonebookEntryFactory")
 const mongoose = require("mongoose");
 
 class PhonebookDatabaseClient {
